@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="mainWindow.css">
+    <title>Media converter</title>
+</head>
+<body>
+    
+    <label class="row1"> Select media type </label>
+    <select name="mediaType" class="row1">
+        <option value="image">image</option>
+        <option value="audio">audio</option>
+        <option value="video">video</option>
+    </select>
+     
+    <label class="row2 first"> Convert from: </label>
+    <select name="sourceExtension" class="row2 first">
+        <!-- filled from js -->
+    </select>
+    <label class="row2 second"> to </label>
+    <select name="targetExtension" class="row2 second">
+        <!-- filled from js -->
+    </select>
+    
+    <label class="row3">Select files</label>
+    <input class="row3">
+    <button class="row3">SELECT</button>
+      
+    <label class="row4">Select save folder</label>
+    <input class="row4">
+    <button class="row4">SELECT</button>
+
+    <button class="main-btn">Convert</button>
+
+    <footer>
+        Developed by <a href="https://www.linkedin.com/in/ahmedkhaled24/" target="_blank"> Ahmed Khaled</a>
+    </footer>
+
+</body>
+</html>
