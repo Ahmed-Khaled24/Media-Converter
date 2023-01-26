@@ -1,0 +1,75 @@
+:root {
+    --button-color: #f08c00;
+}
+
+@font-face {
+    font-family: 'ubuntu-regular';
+    src: url('../assets/Ubuntu-Regular.ttf');
+}
+@font-face {
+    font-family: 'ubuntu-medium';
+    src: url('../assets/Ubuntu-Medium.ttf');
+}
+
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'ubuntu-regular';
+    justify-content: space-between;
+    height: 100vh;
+    padding: 25px;
+    color: white;
+}
+
+button{
+    border: none;
+    border-radius: 10px;
+    background-color:var(--button-color) ;
+    color: white;
+    padding: 8px 16px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    font-family: 'ubuntu-medium';
+    transition-property: background-color;
+    transition-duration: 200ms;
+    transition-timing-function: linear;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+button:hover{
+    background-color: #cf6b00;
+}
+
+h2{
+    font-weight: 300;
+}
+label {
+    font-size: 18px;
+}
+
+.progress {
+    background: #ced4da;
+    border-radius: 10px;
+    height: 25px;
+}
+  
+.progress-value {
+    border-radius: 10px;
+    background: var(--button-color);
+    width: 0%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: white;
+    font-weight: 700;
+}

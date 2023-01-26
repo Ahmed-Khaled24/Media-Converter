@@ -4,4 +4,5 @@ let mainWindow, loadingWindow;
 
 app.on('ready', () => {
     mainWindow = windowFactory('main');
+    loadingWindow = windowFactory('loading');
 });
