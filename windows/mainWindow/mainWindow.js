@@ -13,7 +13,13 @@ const sourceBtn = document.querySelector('button.row3');
 const saveBtn = document.querySelector('button.row4');
 const sourceInput = document.querySelector('input.row3');
 const saveInput = document.querySelector('input.row4');
+const convertBtn = document.querySelector('button.main-btn');
 
+const conversionDetails = {
+    sources: '',
+    saveDirectory: '',
+    toExtension: '',
+}
 
 mediaType.addEventListener('change', (event) => {
     sourceExtension.innerHTML = '';
@@ -39,16 +45,30 @@ mediaType.addEventListener('change', (event) => {
     targetExtension.innerHTML = formats.join('\n');
 });
 
+targetExtension.addEventListener('change', (event) => {
+    conversionDetails.toExtension = targetExtension.value;
+});
+
 sourceBtn.addEventListener('click', () => {
     ipcRenderer.send('selectSources', mediaType.value, sourceExtension.value);
     ipcRenderer.on('selectSourcesRes', (event, sources) => {
+        conversionDetails.sources = sources;
         sourceInput.value = sources;
     })
 });
 
 saveBtn.addEventListener('click', () => {
     ipcRenderer.send('selectSave');
-    ipcRenderer.on('selectSaveRes', (event, saveFolder) => {
-        saveInput.value = saveFolder;
+    ipcRenderer.on('selectSaveRes', (event, saveDirectory) => {
+        conversionDetails.saveDirectory = saveDirectory;
+        saveInput.value = saveDirectory;
     })
+})
+
+convertBtn.addEventListener('click', () => {
+    ipcRenderer.send('startConversion', conversionDetails);
+});
+
+ipcRenderer.on('finishConversion', () => {
+    window.location.reload();
 })
