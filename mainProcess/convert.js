@@ -1,21 +1,24 @@
 const ffmpeg = require('fluent-ffmpeg');
-const {parse, join} = require('path');
+const { parse, join } = require('path');
 
-module.exports = function converter(sources, saveFolderPath, targetExtension, window){
-    sources.forEach((source) => {
-        const {dir, name} = parse(source);
-        const pathWithoutExtension = join(dir, name);
-
-        ffmpeg()
-            .input(source)
-            .output(`${pathWithoutExtension}.${targetExtension}`)
-            .on('progress', ({percent}) => {})
-            .on('error', (err) => {
-                console.log(err.message);
+module.exports = function converter(source, saveFolderPath, targetExtension, loadingWindow) {
+	const {name, ext} = parse(source);   
+	return new Promise((resolve, reject) => {
+		ffmpeg()
+			.input(source)
+			.output( join(saveFolderPath[0], `${name}.${targetExtension}`) )
+            .on('start', () => {
+                loadingWindow.webContents.send('start', `${name}${ext}`)
             })
-            .on('end', () => {
-                console.log('done');
-            })
-            .run();
-    });   
-}
+			.on('progress', ({ percent }) => {
+				loadingWindow.webContents.send('progress', Math.trunc(percent));
+			})
+			.on('error', (err) => {
+				throw new Error(err.message);
+			})
+			.on('end', () => {
+				resolve('done');
+			})
+			.run();
+	});
+};
