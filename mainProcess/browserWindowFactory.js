@@ -21,16 +21,14 @@ module.exports = function windowFactory (windowType) { /* Types such as: main, l
     if(windowType === 'main'){
         browserWindow.setSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
         browserWindow.loadFile(join(__dirname, '../windows/mainWindow/mainWindow.html'));
+        browserWindow.on('ready-to-show', () => {
+            browserWindow.show();
+        });
     } else if(windowType === 'loading'){
         browserWindow.setAlwaysOnTop(true);
         browserWindow.setSize(LOADING_WINDOW_WIDTH, LOADING_WINDOW_HEIGHT);
         browserWindow.loadFile(join(__dirname, '../windows/loading window/loadingWindow.html'));
     }
-
-    browserWindow.on('ready-to-show', () => {
-        browserWindow.center();
-        browserWindow.show();
-    });
 
     return browserWindow;
 }
