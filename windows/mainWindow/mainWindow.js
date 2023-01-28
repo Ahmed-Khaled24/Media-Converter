@@ -1,4 +1,4 @@
-const {ipcRenderer} = require('electron');
+const {ipcRenderer, shell} = require('electron');
 
 const allFormats = {
     video: ['MP4', 'MKV', 'MOV', 'AVI','WMV'],
@@ -14,6 +14,13 @@ const saveBtn = document.querySelector('button.row4');
 const sourceInput = document.querySelector('input.row3');
 const saveInput = document.querySelector('input.row4');
 const convertBtn = document.querySelector('button.main-btn');
+const myLinkedIn = document.querySelector('a')
+
+myLinkedIn.addEventListener('click', (event) => {
+    event.preventDefault();
+    shell.openExternal(myLinkedIn.href);
+})
+
 
 const conversionDetails = {
     sources: '',
