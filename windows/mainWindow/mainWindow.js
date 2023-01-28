@@ -1,26 +1,33 @@
-const videoFormats = ['MP4', 'MKV', 'MOV', 'AVI','WMV'];
-const audioFormats = ['WAV', 'AIFF', 'MP3', 'AAC', 'OGG', 'WMA', 'FLAC', 'ALAC'];
-const imageFormats = [ 'JPEG', 'JPG', 'PNG', 'GIF','WebP' ,'TIFF', 'BMP', 'HEIF', 'SVG' ];
+const {ipcRenderer} = require('electron');
+
+const allFormats = {
+    video: ['MP4', 'MKV', 'MOV', 'AVI','WMV'],
+    audio: ['WAV', 'AIFF', 'MP3', 'AAC', 'OGG', 'WMA', 'FLAC', 'ALAC'],
+    image: [ 'JPEG', 'JPG', 'PNG', 'GIF','WebP' ,'TIFF', 'BMP', 'HEIF', 'SVG']
+};
 
 const mediaType = document.querySelector('select[name="mediaType"]');
 const sourceExtension = document.querySelector('select[name="sourceExtension"]');
 const targetExtension = document.querySelector('select[name="targetExtension"]');
+const sourceBtn = document.querySelector('button.row3');
+const saveBtn = document.querySelector('button.row4');
+const sourceInput = document.querySelector('input.row3');
+const saveInput = document.querySelector('input.row4');
 
 
 mediaType.addEventListener('change', (event) => {
-    console.log('media type changed');
     sourceExtension.innerHTML = '';
     targetExtension.innerHTML = '';
     let formats;
     switch(mediaType.value){
         case 'video':
-            formats = videoFormats;
+            formats = allFormats.video;
             break;
         case 'image': 
-            formats = imageFormats;
+            formats = allFormats.image;
             break;
         case 'audio':
-            formats = audioFormats;
+            formats = allFormats.audio;
             break;
         default: 
             console.log('Unsupported type');
@@ -31,3 +38,17 @@ mediaType.addEventListener('change', (event) => {
     sourceExtension.innerHTML = formats.join('\n');
     targetExtension.innerHTML = formats.join('\n');
 });
+
+sourceBtn.addEventListener('click', () => {
+    ipcRenderer.send('selectSources', mediaType.value, sourceExtension.value);
+    ipcRenderer.on('selectSourcesRes', (event, sources) => {
+        sourceInput.value = sources;
+    })
+});
+
+saveBtn.addEventListener('click', () => {
+    ipcRenderer.send('selectSave');
+    ipcRenderer.on('selectSaveRes', (event, saveFolder) => {
+        saveInput.value = saveFolder;
+    })
+})
