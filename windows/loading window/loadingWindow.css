@@ -73,3 +73,7 @@ label {
     color: white;
     font-weight: 700;
 }
+
+.fileName {
+    font-size: 14px;
+}
