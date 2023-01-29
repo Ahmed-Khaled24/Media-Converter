@@ -6,6 +6,7 @@ let mainWindow, loadingWindow;
 app.on('ready', () => {
 	mainWindow = windowFactory('main');
 	loadingWindow = windowFactory('loading');
+	Menu.setApplicationMenu(Menu.buildFromTemplate([]));
 });
 
 ipcMain.on('selectSources', (event, type, extension) => {
@@ -36,13 +37,13 @@ ipcMain.on(
 	'startConversion',
 	async (event, { sources, saveDirectory, toExtension }) => {
 		if(!sources){
-			dialog.showErrorBox('error', 'No file selected');
+			dialog.showErrorBox('Insufficient input', 'No source file selected');
 			return;
 		} else if (!saveDirectory){
-			dialog.showErrorBox('error', 'No save directory selected');
+			dialog.showErrorBox('Insufficient input', 'No save directory selected');
 			return;
 		} else if (!toExtension) {
-			dialog.showErrorBox('error', 'No target extension selected');
+			dialog.showErrorBox('Insufficient input', 'No target extension selected');
 			return;
 		}
 
@@ -57,7 +58,6 @@ ipcMain.on(
 				);
 				if (i === sources.length - 1) {
 					loadingWindow.hide();
-					mainWindow.webContents.send('finishConversion');
 					dialog.showMessageBoxSync(mainWindow, {
 						title: 'Conversion finish',
 						message: `${i+1} File converted successfully.`,
@@ -65,6 +65,7 @@ ipcMain.on(
 					});
 				}
 			} catch (err) {
+				loadingWindow.hide();
 				dialog.showErrorBox('error', err.message);
 				break;
 			}
