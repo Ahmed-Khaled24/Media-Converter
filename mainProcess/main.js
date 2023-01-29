@@ -5,6 +5,9 @@ let mainWindow, loadingWindow;
 
 app.on('ready', () => {
 	mainWindow = windowFactory('main');
+	mainWindow.on('closed', () => {
+		app.quit();
+	})
 	loadingWindow = windowFactory('loading');
 	Menu.setApplicationMenu(Menu.buildFromTemplate([]));
 });
