@@ -1,10 +1,16 @@
 const {BrowserWindow} = require('electron');
 const {join} = require('path');
 
-const MAIN_WINDOW_WIDTH = 600;
-const MAIN_WINDOW_HEIGHT = 350;
-const LOADING_WINDOW_WIDTH = 400;
-const LOADING_WINDOW_HEIGHT = 250;
+const DIMENSIONS = {
+    main: {
+        height: 350,
+        width: 600,
+    },
+    loading: {
+        height: 250,
+        width: 400,
+    }
+}
 
 
 module.exports = function windowFactory (windowType) { /* Types such as: main, loading, alert */
@@ -19,16 +25,17 @@ module.exports = function windowFactory (windowType) { /* Types such as: main, l
     });
 
     if(windowType === 'main'){
-        browserWindow.setSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+        browserWindow.setSize(DIMENSIONS.main.width, DIMENSIONS.main.height);
         browserWindow.loadFile(join(__dirname, '../windows/mainWindow/mainWindow.html'));
         browserWindow.on('ready-to-show', () => {
             browserWindow.show();
         });
     } else if(windowType === 'loading'){
         browserWindow.setAlwaysOnTop(true);
-        browserWindow.setSize(LOADING_WINDOW_WIDTH, LOADING_WINDOW_HEIGHT);
+        browserWindow.setSize(DIMENSIONS.loading.width, DIMENSIONS.loading.height);
         browserWindow.loadFile(join(__dirname, '../windows/loading window/loadingWindow.html'));
     }
 
+    browserWindow.center();
     return browserWindow;
 }
