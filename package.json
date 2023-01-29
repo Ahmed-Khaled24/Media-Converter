@@ -1,16 +1,22 @@
 {
-  "name": "media-converter-ll",
+  "name": "media-converter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Media converter desktop application support many image, video, and audio extensions",
   "main": "./mainProcess/main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "win": "electron-builder -w "
+  },
+  "build" : {
+    "target": "nsis",
+    "icon": "./icon.png"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^22.0.3"
+    "electron": "^22.0.3",
+    "electron-builder": "^23.6.0"
   },
   "dependencies": {
     "fluent-ffmpeg": "^2.1.2"
