@@ -1,135 +1,139 @@
 :root {
-    --button-color: #f08c00;
+	--button-color: #f08c00;
 }
 
 @font-face {
-    font-family: 'ubuntu-regular';
-    src: url('../assets/Ubuntu-Regular.ttf');
+	font-family: 'ubuntu-regular';
+	src: url('../assets/Ubuntu-Regular.ttf');
 }
 @font-face {
-    font-family: 'ubuntu-medium';
-    src: url('../assets/Ubuntu-Medium.ttf');
+	font-family: 'ubuntu-medium';
+	src: url('../assets/Ubuntu-Medium.ttf');
 }
 
-*{
-    padding:0;
-    margin:0;
-    box-sizing: border-box;
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
-body{
-    font-family: 'ubuntu-regular';
-    padding: 40px;
-    background-color: #343A40;
-    color: white;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
-    position: relative;
+body {
+	font-family: 'ubuntu-regular';
+	padding: 40px;
+	background-color: #343a40;
+	color: white;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: repeat(5, 1fr);
+	gap: 10px;
+	position: relative;
 }
-label{
-    font-size: 18px;
-    grid-column: 1 / span 2;
+label {
+	font-size: 18px;
+	grid-column: 1 / span 2;
 }
 input {
-    width: 200px;
-    height: 30px;
-    border-radius: 10px;
-    border: none
+	width: 200px;
+	height: 30px;
+	border-radius: 10px;
+	border: none;
+	padding: 10px;
+	font-size: 10px;
 }
-select{
-    height: 30px;
-    border-radius: 10px;
-    border: none;
-    padding-left: 5px;
-    font-family: 'ubuntu-regular';
+select {
+	height: 30px;
+	border-radius: 10px;
+	border: none;
+	padding-left: 5px;
+	font-family: 'ubuntu-regular';
 }
-button{
-    border: none;
-    border-radius: 10px;
-    background-color:var(--button-color) ;
-    color: white;
-    padding: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'ubuntu-medium';
-    transition-property: background-color;
-    transition-duration: 200ms;
-    transition-timing-function: linear;
-    letter-spacing: 1px;
+select:focus-visible,
+input:focus-visible {
+	outline: none;
 }
-button:hover{
-    background-color: #cf6b00;
+
+button {
+	border: none;
+	border-radius: 10px;
+	background-color: var(--button-color);
+	color: white;
+	padding: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'ubuntu-medium';
+	transition-property: background-color;
+	transition-duration: 200ms;
+	transition-timing-function: linear;
+	letter-spacing: 1px;
 }
-footer{
-    position: absolute;
-    bottom: 15px;
-    right: 40px;
-    font-size: 10px;
+button:hover {
+	background-color: #cf6b00;
+}
+footer {
+	position: absolute;
+	bottom: 15px;
+	right: 40px;
+	font-size: 10px;
 }
 a {
-    text-decoration: none;
-    color:  #fcc419;
-    font-family: 'ubuntu-medium';
+	text-decoration: none;
+	color: #fcc419;
+	font-family: 'ubuntu-medium';
 }
 
-.row1{
-    grid-row: 1;
-    align-self: center;
+.row1 {
+	grid-row: 1;
+	align-self: center;
 }
-select.row1{
-    grid-column: 3 / span 3;
-}
-
-.row2{
-    grid-row:2;
-    align-self: center;
-}
-label.row2.first{
-    grid-column: 1 / span 2;
-}
-label.row2.second{
-    grid-column: 4 / span 1;
-    justify-self: center;
-}
-select.row2.first{
-    grid-column: 3 / span 1;
-}
-select.row2.second{
-    grid-column: 5 / span 1;
+select.row1 {
+	grid-column: 3 / span 3;
 }
 
-.row3{
-    grid-row: 3;
-    align-self: center;
+.row2 {
+	grid-row: 2;
+	align-self: center;
 }
-input.row3{
-    grid-column: 4 / span 2;
+label.row2.first {
+	grid-column: 1 / span 2;
 }
-button.row3{
-    grid-column: 3;
+label.row2.second {
+	grid-column: 4 / span 1;
+	justify-self: center;
 }
-
-.row4{
-    grid-row: 4;
-    align-self: center;
+select.row2.first {
+	grid-column: 3 / span 1;
 }
-input.row4{
-    grid-column: 4 / span 2;
-}
-button.row4{
-    grid-column: 3;
+select.row2.second {
+	grid-column: 5 / span 1;
 }
 
-.main-btn{
-    align-self: center;
-    grid-row: 5;
-    font-family: 'ubuntu-medium';
-    font-size: 18px;
-    letter-spacing: 0px;
+.row3 {
+	grid-row: 3;
+	align-self: center;
+}
+input.row3 {
+	grid-column: 4 / span 2;
+}
+button.row3 {
+	grid-column: 3;
 }
 
+.row4 {
+	grid-row: 4;
+	align-self: center;
+}
+input.row4 {
+	grid-column: 4 / span 2;
+}
+button.row4 {
+	grid-column: 3;
+}
 
-
+.main-btn {
+	align-self: center;
+	grid-row: 5;
+	font-family: 'ubuntu-medium';
+	font-size: 18px;
+	letter-spacing: 0px;
+}

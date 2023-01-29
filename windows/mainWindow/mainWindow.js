@@ -1,9 +1,9 @@
 const {ipcRenderer, shell} = require('electron');
 
 const allFormats = {
-    video: ['MP4', 'MKV', 'MOV', 'AVI','WMV'],
-    audio: ['WAV', 'AIFF', 'MP3', 'AAC', 'OGG', 'WMA', 'FLAC', 'ALAC'],
-    image: [ 'JPEG', 'JPG', 'PNG', 'GIF','WebP' ,'TIFF', 'BMP', 'HEIF', 'SVG']
+    video: ['mp4', 'mkv', 'mov', 'avi','wmv'],
+    audio: ['wav', 'aiff', 'mp3', 'aac', 'ogg', 'wma', 'flac', 'alac'],
+    image: [ 'jpeg', 'jpg', 'png', 'gif','webp' ,'tiff', 'bmp', 'heif', 'svg']
 };
 
 const mediaType = document.querySelector('select[name="mediaType"]');
@@ -21,35 +21,8 @@ myLinkedIn.addEventListener('click', (event) => {
     shell.openExternal(myLinkedIn.href);
 })
 
-
-const conversionDetails = {
-    sources: '',
-    saveDirectory: '',
-    toExtension: '',
-}
-
 mediaType.addEventListener('change', (event) => {
-    sourceExtension.innerHTML = '';
-    targetExtension.innerHTML = '';
-    let formats;
-    switch(mediaType.value){
-        case 'video':
-            formats = allFormats.video;
-            break;
-        case 'image': 
-            formats = allFormats.image;
-            break;
-        case 'audio':
-            formats = allFormats.audio;
-            break;
-        default: 
-            console.log('Unsupported type');
-    }
-    formats = formats.map( (format) => {
-        return `<option name='${format}'> ${format} </option>`
-    });
-    sourceExtension.innerHTML = formats.join('\n');
-    targetExtension.innerHTML = formats.join('\n');
+    fillSelectors(mediaType.value);
 });
 
 targetExtension.addEventListener('change', (event) => {
@@ -79,3 +52,35 @@ convertBtn.addEventListener('click', () => {
 ipcRenderer.on('finishConversion', () => {
     window.location.reload();
 })
+
+function fillSelectors(type) {
+    sourceExtension.innerHTML = '';
+    targetExtension.innerHTML = '';
+    let formats;
+    switch(type){
+        case 'video':
+            formats = allFormats.video;
+            break;
+        case 'image': 
+            formats = allFormats.image;
+            break;
+        case 'audio':
+            formats = allFormats.audio;
+            break;
+        default: 
+            console.log('Unsupported type');
+    }
+    formats = formats.map( (format) => {
+        return `<option name='${format}'> ${format} </option>`
+    });
+    sourceExtension.innerHTML = formats.join('\n');
+    targetExtension.innerHTML = formats.join('\n');
+}
+
+fillSelectors('image');
+
+const conversionDetails = {
+    sources: '',
+    saveDirectory: '',
+    toExtension: targetExtension.value,
+}
