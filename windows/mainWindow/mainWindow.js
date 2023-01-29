@@ -2,8 +2,8 @@ const {ipcRenderer, shell} = require('electron');
 
 const allFormats = {
     video: ['mp4', 'mkv', 'mov', 'avi','wmv'],
-    audio: ['wav', 'aiff', 'mp3', 'aac', 'ogg', 'wma', 'flac', 'alac'],
-    image: [ 'jpeg', 'jpg', 'png', 'gif','webp' ,'tiff', 'bmp', 'heif', 'svg']
+    audio: ['wav', 'aiff', 'mp3', 'aac', 'ogg', 'wma', 'flac'],
+    image: [ 'jpeg', 'jpg', 'png', 'gif','webp' ,'tiff', 'bmp']
 };
 
 const mediaType = document.querySelector('select[name="mediaType"]');
@@ -49,9 +49,6 @@ convertBtn.addEventListener('click', () => {
     ipcRenderer.send('startConversion', conversionDetails);
 });
 
-ipcRenderer.on('finishConversion', () => {
-    window.location.reload();
-})
 
 function fillSelectors(type) {
     sourceExtension.innerHTML = '';
@@ -76,7 +73,6 @@ function fillSelectors(type) {
     sourceExtension.innerHTML = formats.join('\n');
     targetExtension.innerHTML = formats.join('\n');
 }
-
 fillSelectors('image');
 
 const conversionDetails = {
