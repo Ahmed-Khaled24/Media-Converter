@@ -1,6 +1,17 @@
 const ffmpeg = require('fluent-ffmpeg');
 const { parse, join } = require('path');
 
+const ffmpegPath = require('ffmpeg-static').replace(
+    'app.asar',
+    'app.asar.unpacked'
+);
+const ffprobePath = require('ffprobe-static').path.replace(
+    'app.asar',
+    'app.asar.unpacked'
+);
+ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfprobePath(ffprobePath);
+
 module.exports = function converter(
 	source,
 	saveFolderPath,
